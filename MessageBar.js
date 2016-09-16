@@ -358,20 +358,33 @@ class MessageBar extends Component {
     // Set the animation transformation depending on the chosen animationType, or depending on the state's position if animationType is not overridden
     this._applyAnimationTypeTransformation();
 
+    const renderMessageView = this.props.renderMessageView || this.renderMessageView
+
     return (
       <Animated.View style={{ transform: this.animationTypeTransform, backgroundColor: this.state.backgroundColor, borderColor: this.state.strokeColor, borderBottomWidth: 1, position: 'absolute', top: this.state.viewTopOffset, bottom: this.state.viewBottomOffset, left: this.state.viewLeftOffset, right: this.state.viewRightOffset, paddingTop: this.state.viewTopInset, paddingBottom: this.state.viewBottomInset, paddingLeft: this.state.viewLeftInset, paddingRight: this.state.viewRightInset }}>
-        <TouchableOpacity onPress={()=>{this._alertTapped()}} style={{ flex: 1 }}>
-          <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', padding: 10 }} >
-            { this.renderImage() }
-            <View style={{ flex: 1, flexDirection: 'column', alignSelf: 'stretch', justifyContent: 'center', marginLeft: 10 }} >
-              { this.renderTitle() }
-              { this.renderMessage() }
-            </View>
-          </View>
-        </TouchableOpacity>
+        { renderMessageView({
+          renderMessageView: this.renderMessageView,
+          renderTitle: this.renderTitle,
+          renderMessage: this.renderMessage,
+          renderImage: this.renderImage,
+          alertTapped: this._alertTapped,
+          getState: this._getState
+        }) }
       </Animated.View>
     );
   }
+
+  renderMessageView = ({ renderTitle, renderMessage, renderImage, alertTapped }) => (
+    <TouchableOpacity onPress={alertTapped} style={{ flex: 1 }}>
+      <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', padding: 10 }} >
+        { renderImage() }
+        <View style={{ flex: 1, flexDirection: 'column', alignSelf: 'stretch', justifyContent: 'center', marginLeft: 10 }} >
+          { renderTitle() }
+          { renderMessage() }
+        </View>
+      </View>
+    </TouchableOpacity>
+  )
 
   renderImage = () => {
     if (this.state.avatar != null) {
@@ -409,6 +422,10 @@ class MessageBar extends Component {
         </Text>
       );
     }
+  }
+
+  _getState = (key) => {
+    return this.state[key]
   }
 
 }
