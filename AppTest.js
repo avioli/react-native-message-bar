@@ -227,13 +227,13 @@ class MessageBar extends Component {
       </ScrollView>
 
       <MessageBarAlert ref="alert" renderMessageView={(props) => {
-        const { getState, renderMessageView, renderTitle, renderMessage, renderImage, alertTapped } = props
+        const { getState, renderMessageView, style, renderTitle, renderMessage, renderImage, alertTapped } = props
 
         if (getState('alertType') !== 'extra') {
           return renderMessageView(props)
         }
 
-        return <TouchableOpacity onPress={alertTapped} style={{ flex: 1 }}>
+        return <TouchableOpacity onPress={alertTapped} style={[{ flex: 1 }, style, { borderRadius: 10, margin: 10 }]}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', padding: 10 }} >
             { renderImage() }
             <View style={{ flex: 1, flexDirection: 'column', alignSelf: 'stretch', justifyContent: 'center', marginLeft: 10 }} >

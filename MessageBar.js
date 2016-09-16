@@ -358,11 +358,29 @@ class MessageBar extends Component {
     // Set the animation transformation depending on the chosen animationType, or depending on the state's position if animationType is not overridden
     this._applyAnimationTypeTransformation();
 
+    const style = {
+      backgroundColor: this.state.backgroundColor,
+      borderColor: this.state.strokeColor,
+      borderBottomWidth: 1,
+      paddingTop: this.state.viewTopInset,
+      paddingBottom: this.state.viewBottomInset,
+      paddingLeft: this.state.viewLeftInset,
+      paddingRight: this.state.viewRightInset
+    }
+
     const renderMessageView = this.props.renderMessageView || this.renderMessageView
 
     return (
-      <Animated.View style={{ transform: this.animationTypeTransform, backgroundColor: this.state.backgroundColor, borderColor: this.state.strokeColor, borderBottomWidth: 1, position: 'absolute', top: this.state.viewTopOffset, bottom: this.state.viewBottomOffset, left: this.state.viewLeftOffset, right: this.state.viewRightOffset, paddingTop: this.state.viewTopInset, paddingBottom: this.state.viewBottomInset, paddingLeft: this.state.viewLeftInset, paddingRight: this.state.viewRightInset }}>
+      <Animated.View style={{
+        transform: this.animationTypeTransform,
+        position: 'absolute',
+        top: this.state.viewTopOffset,
+        bottom: this.state.viewBottomOffset,
+        left: this.state.viewLeftOffset,
+        right: this.state.viewRightOffset
+      }}>
         { renderMessageView({
+          style,
           renderMessageView: this.renderMessageView,
           renderTitle: this.renderTitle,
           renderMessage: this.renderMessage,
@@ -374,8 +392,8 @@ class MessageBar extends Component {
     );
   }
 
-  renderMessageView = ({ renderTitle, renderMessage, renderImage, alertTapped }) => (
-    <TouchableOpacity onPress={alertTapped} style={{ flex: 1 }}>
+  renderMessageView = ({ style, renderTitle, renderMessage, renderImage, alertTapped }) => (
+    <TouchableOpacity onPress={alertTapped} style={[{ flex: 1 }, style]}>
       <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', padding: 10 }} >
         { renderImage() }
         <View style={{ flex: 1, flexDirection: 'column', alignSelf: 'stretch', justifyContent: 'center', marginLeft: 10 }} >
