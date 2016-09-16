@@ -11,6 +11,7 @@ A message bar notification component displayed at the top of the screen for Reac
 
 
 ## Content
+
 - [Features](#features)
 - [Installation](#installation)
 - [Basic Usage](#basic-usage)
@@ -27,6 +28,7 @@ A message bar notification component displayed at the top of the screen for Reac
 
 
 ## Features
+
 - Android and iOS capable
 - Animated alert with Title, Message and Icon/Avatar (from a local or a remote image file)
 - Top or Bottom display
@@ -42,14 +44,18 @@ A message bar notification component displayed at the top of the screen for Reac
 
 
 ## Installation
+
 Make sure that you are in your React Native project directory and run:
+
 ```batch
 $ npm install react-native-message-bar --save
 ```
 
 
 ## Basic Usage
+
 - 1. Import the `react-native-message-bar` package
+
 ```javascript
 var MessageBarAlert = require('react-native-message-bar').MessageBar;
 var MessageBarManager = require('react-native-message-bar').MessageBarManager;
@@ -57,6 +63,7 @@ var MessageBarManager = require('react-native-message-bar').MessageBarManager;
 
 - 2. Add the `MessageBarAlert` to your render function
 Note: Add it at the very end of your render function, the alert will then be displayed over any component of the view
+
 ```javascript
 // Within your render function.
 // Include the MessageBar once within your top View element
@@ -65,6 +72,7 @@ Note: Add it at the very end of your render function, the alert will then be dis
 ```
 
 - 3. Register and Release your Message Bar as the current main alert
+
 ```javascript
 componentDidMount() {
   // Register the alert located on this master page
@@ -80,6 +88,7 @@ componentWillUnmount() {
 ```
 
 - 4. Display the Message Bar Alert on demand
+
 ```javascript
 // Call this method after registering your MessageBar as the current alert
 // By calling this method the registered alert will be displayed
@@ -92,15 +101,16 @@ MessageBarManager.showAlert({
   // Or check `index.ios.js` or `index.android.js` for a complete example
 });
 ```
+
 Please note, if you do not provide a `alertType`, the `info` one will be chosen for you.
 
 The normal `duration` of the notification is 3 seconds (3000 ms), you can override it. After this time, the notification is going to be hidden
-
 
 See a full Example in `index.ios.js` or `index.android.js`.
 
 
 ## Hide the Message Bar Alert
+
 ```javascript
 // You can force the current alert to be hidden through the Manager
 MessageBarManager.hideAlert();
@@ -108,9 +118,11 @@ MessageBarManager.hideAlert();
 
 
 ## Customize Alert Type
+
 The Message Bar Alert comes with 4 pre-configured alert style and 1 undefined extra.
 These alert styles defined the background color of the alert and the line stroke color.
 The 4 pre-configured alert styles are:
+
 - `info` defined blue colors
 - `success` defined green colors
 - `warning` defined orange colors
@@ -137,7 +149,9 @@ MessageBarManager.showAlert({
 
 
 ## Customize Alert Content
+
 You can customize the style of the Title, Message and Icon/Avatar.
+
 ```javascript
 MessageBarManager.showAlert({
   ...
@@ -161,7 +175,9 @@ MessageBarManager.showAlert({
 
 
 ## Customize Message Bar Alert Layout
+
 You can customize the inset (padding) and the offset of the alert.
+
 ```javascript
 MessageBarManager.showAlert({
   ...
@@ -182,8 +198,10 @@ MessageBarManager.showAlert({
 
 
 ## Customize Position and Animation, Twitter Style!
+
 You can choose the position (`top`or `bottom`) of the alert.
 You can choose the way the alert is shown (`SlideFromTop`, `SlideFromBottom`, `SlideFromLeft` or `SlideFromRight`).
+
 ```javascript
 MessageBarManager.showAlert({
   ...
@@ -198,6 +216,7 @@ MessageBarManager.showAlert({
 
 
 ## Properties
+
 Prop                  | Type     | Default              | Description
 --------------------- | -------- | -------------------- | -----------
 title                 | String   |                      | Title of the alert
@@ -235,6 +254,7 @@ animationType         | String   | SlideFromTop         | Define the way the ale
 
 
 ## Contributing
+
 1. Fork this Repo first
 2. Clone your Repo
 3. Install dependencies by $ npm install
@@ -246,6 +266,7 @@ animationType         | String   | SlideFromTop         | Define the way the ale
 
 
 ## TODOS
+
 - [ ] Add Alert Queuing System
 - [x] Add Bottom Position
 - [x] Add Slide Animations Type (Slide from Top, Bottom, Left, Right)
@@ -255,12 +276,14 @@ animationType         | String   | SlideFromTop         | Define the way the ale
 
 
 ## Apps using this library
+
 - Your App here...
 
 
 ---
 
 ## License
+
 `React-Native-Message-Bar` is released under MIT License. See `LICENSE` for details.
 
 >**Copyright &copy; 2016 KBLNY.**
