@@ -6,7 +6,7 @@
   "private": false,
   "author": "KBLNY <ktgr45@hotmail.com> (https://github.com/kblny)",
   "scripts": {
-    "start": "react-native start"
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "repository": {
     "type": "git",
@@ -33,5 +33,9 @@
   "bugs": {
     "url": "https://github.com/KBLNY/react-native-message-bar/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "react": "15.3.1",
+    "react-native": "0.33.0"
+  }
 }
