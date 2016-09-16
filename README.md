@@ -59,6 +59,11 @@ $ npm install react-native-message-bar --save
 ```javascript
 var MessageBarAlert = require('react-native-message-bar').MessageBar;
 var MessageBarManager = require('react-native-message-bar').MessageBarManager;
+
+// or using ES2015 import syntax
+
+import MessageBarAlert from 'react-native-message-bar/MessageBar';
+import MessageBarManager from 'react-native-message-bar/MessageBarManager';
 ```
 
 - 2. Add the `MessageBarAlert` to your render function
