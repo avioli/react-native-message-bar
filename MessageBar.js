@@ -194,7 +194,7 @@ class MessageBar extends Component {
   /*
   * Callback executed when the user tap the alert
   */
-  _alertTapped() {
+  _alertTapped = () => {
     // Hide the alert
     if (this.state.shouldHideOnTap) {
       this.hideMessageBarAlert();
@@ -373,7 +373,7 @@ class MessageBar extends Component {
     );
   }
 
-  renderImage() {
+  renderImage = () => {
     if (this.state.avatar != null) {
       var imageSource;
       let uri = this.state.avatar;
@@ -391,7 +391,7 @@ class MessageBar extends Component {
     }
   }
 
-  renderTitle() {
+  renderTitle = () => {
     if (this.state.title != null) {
       return (
         <Text numberOfLines={this.state.titleNumberOfLines} style={this.state.titleStyle}>
@@ -401,7 +401,7 @@ class MessageBar extends Component {
     }
   }
 
-  renderMessage() {
+  renderMessage = () => {
     if (this.state.message != null) {
       return (
         <Text numberOfLines={this.state.messageNumberOfLines} style={this.state.messageStyle}>
