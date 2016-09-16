@@ -369,6 +369,16 @@ class MessageBar extends Component {
     }
 
     const renderMessageView = this.props.renderMessageView || this.renderMessageView
+    const propsToPass = {
+      style,
+      renderMessageView: this.renderMessageView,
+      renderTitle: this.renderTitle,
+      renderMessage: this.renderMessage,
+      renderImage: this.renderImage,
+      alertTapped: this._alertTapped,
+      getState: this._getState
+    }
+    const renderedMessageView = renderMessageView(propsToPass)
 
     return (
       <Animated.View style={{
@@ -379,15 +389,7 @@ class MessageBar extends Component {
         left: this.state.viewLeftOffset,
         right: this.state.viewRightOffset
       }}>
-        { renderMessageView({
-          style,
-          renderMessageView: this.renderMessageView,
-          renderTitle: this.renderTitle,
-          renderMessage: this.renderMessage,
-          renderImage: this.renderImage,
-          alertTapped: this._alertTapped,
-          getState: this._getState
-        }) }
+        { renderedMessageView !== undefined ? renderedMessageView : this.renderMessageView(propsToPass) }
       </Animated.View>
     );
   }
