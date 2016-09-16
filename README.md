@@ -201,6 +201,51 @@ MessageBarManager.showAlert({
 });
 ```
 
+### Advanced
+
+You can customize the component's structure by providing a `renderMessageView` prop to `<MessageBarAlert>`.
+
+This will give you a chance to render a slightly or very different component structure, based on things like `alertType`, `position` or even `title`.
+
+Below is a slightly modified version of the default implementation - one that only renders for 'extra' types and has rounded border, plus the text 'EXTRA' above the title and message.
+
+```javascript
+// inside your root level component's renderer - add the extra prop:
+render () {
+  // ...
+    <MessageBarAlert ref="alert" renderMessageView={this._renderMessageView}>
+  // ...
+}
+
+// define the callback handler:
+_renderMessageView (args) {
+  const { getState, style, renderTitle, renderMessage, renderImage, alertTapped } = args
+
+  // Ignore every alert type except `extra`.
+  if (getState('alertType') !== 'extra') {
+    return
+  }
+
+  // Add extra rounding and margin (which does the same as the view insets)
+  return <TouchableOpacity onPress={alertTapped} style={[{ flex: 1 }, style, { borderRadius: 10, margin: 10 }]}>
+    <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', padding: 10 }} >
+      { renderImage() }
+      <View style={{ flex: 1, flexDirection: 'column', alignSelf: 'stretch', justifyContent: 'center', marginLeft: 10 }} >
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>EXTRA</Text>
+        { renderTitle() }
+        { renderMessage() }
+      </View>
+    </View>
+  </TouchableOpacity>
+}}
+```
+
+**Notes:**
+
+- Returning `undefined` falls back to the internal renderer, compared to returning any other falsy value (like `null`), which will render nothing. This is intentional, since you might actually want to **not** render anything (wat?).
+- The value of the `style` key is currently a plain object, but could become (for performance reasons) a reference (which is a number) or an array of styles (again most likely references). Best advice is - _do not rely on it being an object_. Use `getState()` to get values such as `backgroundColor` and `strokeColor`.
+- You can return any custom component structure, but it is best advised to at least use `getState()` to get the `title` and `message` values, supplied by `showAlert()`.
+  
 
 ## Customize Position and Animation, Twitter Style!
 
