@@ -15,7 +15,9 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   TouchableOpacity,
+  Platform
 } from 'react-native';
 
 
@@ -137,8 +139,8 @@ class MessageBar extends Component {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
+    return (<View style={styles.container}>
+      <ScrollView>
 
       {
         // Otherwise, You can directly declare a MessageBar alert with its properties and display it by using its reference this.refs.alert.showMessageBarAlert()
@@ -222,9 +224,10 @@ class MessageBar extends Component {
           <Text style={[styles.button, {backgroundColor: 'darkgray'}]}>Hide Current Alert</Text>
         </TouchableOpacity>
 
-        <MessageBarAlert ref="alert" />
-      </View>
-    );
+      </ScrollView>
+
+      <MessageBarAlert ref="alert" />
+    </View>);
   }
 }
 
@@ -233,9 +236,8 @@ module.exports = MessageBar;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    paddingTop: Platform.OS === 'android' ? 0 : 20
   },
   welcome: {
     fontSize: 20,
